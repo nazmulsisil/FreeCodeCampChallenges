@@ -63,8 +63,8 @@ const functionDescriptions = [
   // otherUser,
   mine1
   // intermediate,
-  // basic
-  // mine2
+  // basic,
+  // mine2,
   // advanced
 ];
 

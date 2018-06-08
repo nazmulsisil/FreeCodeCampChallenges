@@ -1,31 +1,51 @@
-///////////// OTHER USERS ///////////////////
-String.prototype.replaceAt = function(index, character) {
-  return (
-    this.substr(0, index) + character + this.substr(index + character.length)
-  );
-};
+function sumPrimes(num) {
+  const primes = [2];
+  let finalSum = 2;
+  // const latestP = () => primes[primes.length - 1];
 
-function titleCase(str) {
-  var newTitle = str.toLowerCase().split(' ');
-  var updatedTitle = [];
-  for (var st in newTitle) {
-    updatedTitle[st] = newTitle[st].replaceAt(
-      0,
-      newTitle[st].charAt(0).toUpperCase()
-    );
+  const isPrime = whichNum => {
+    let counter = 0;
+    const primer = () => {
+      return primes[counter];
+    };
+    const rebound = () => whichNum / primer();
+    let foundPrime = true;
+    while (primer() !== undefined && primer() <= rebound()) {
+      if (whichNum % primer() === 0) {
+        foundPrime = false;
+      }
+      counter++;
+    }
+    return foundPrime;
+  };
+
+  let numToTest;
+
+  const nextPrime = x => {
+    numToTest = x + 1;
+    while (!isPrime(numToTest)) {
+      if (++numToTest > num) return false;
+    }
+    return true;
+  };
+
+  while (nextPrime(primes[primes.length - 1])) {
+    finalSum += numToTest;
+    primes.push(numToTest);
   }
-  return updatedTitle.join(' ');
+
+  return primes; // primes.reduce((a, b) => a + b); //.reduce((a, b) => a + b);
 }
 
 export const otherUser = data => {
   if (data.times === 1) {
-    console.log(titleCase(data.paragraph));
+    console.log(sumPrimes(20));
     return;
   }
   let count = 0;
   const start = new Date();
   while (new Date() - start < data.duration) {
-    titleCase(data.paragraph);
+    sumPrimes(500);
     count++;
   }
   return count;

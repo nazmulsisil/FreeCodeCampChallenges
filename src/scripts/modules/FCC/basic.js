@@ -1,23 +1,40 @@
-function myReplace(str, before, after) {
-  const index = str.indexOf(before);
-  if (str[index] === str[index].toUpperCase()) {
-    after = after.charAt(0).toUpperCase() + after.slice(1);
+function smallestCommons(arr) {
+  arr.sort(function(a, b) {
+    return b - a;
+  });
+
+  var newArr = [];
+  for (var i = arr[0]; i >= arr[1]; i--) {
+    newArr.push(i);
   }
-  str = str.replace(before, after);
-  return str;
+
+  var quot = 0;
+  var loop = 1;
+  var n;
+
+  do {
+    quot = newArr[0] * loop * newArr[1];
+    for (n = 2; n < newArr.length; n++) {
+      if (quot % newArr[n] !== 0) {
+        break;
+      }
+    }
+
+    loop++;
+  } while (n !== newArr.length);
+
+  return quot;
 }
 
 export const basic = data => {
   if (data.times === 1) {
-    console.log(
-      myReplace('Let us get back to more Coding', 'Coding', 'algorithms')
-    );
+    console.log(smallestCommons([1, 13]));
     return;
   }
   let count = 0;
   const start = new Date();
   while (new Date() - start < data.duration) {
-    myReplace('Let us get back to more Coding', 'Coding', 'algorithms');
+    smallestCommons([1, 13]);
     count++;
   }
   return count;

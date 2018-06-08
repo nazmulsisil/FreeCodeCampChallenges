@@ -1,29 +1,31 @@
-function fearNotLetter(str) {
-  let expectedCharCode = str.charCodeAt(0);
-  let curCharCode;
-  for (let i = 1; i < str.length; i++) {
-    expectedCharCode += 1;
-    curCharCode = str.charCodeAt(i);
+function smallestCommons(arr) {
+  const resArr = [];
+  for (let i = Math.max(arr[0], arr[1]); i >= Math.min(arr[0], arr[1]); i--) {
+    resArr.push(i);
+  }
 
-    if (curCharCode !== expectedCharCode) {
-      return String.fromCharCode(expectedCharCode);
-    }
+  let lcm = resArr[0];
+  for (let i = 1; i < resArr.length; i++) {
+    const GCD = gcd(lcm, resArr[i]);
+    lcm = (lcm * resArr[i]) / GCD;
+  }
+  return lcm;
 
-    // const prevCharCode = str.charCodeAt(i - 1);
-    // if (str.charCodeAt(i) !== prevCharCode + 1)
-    //   return String.fromCharCode(prevCharCode + 1);
+  function gcd(x, y) {
+    if (y === 0) return x;
+    return gcd(y, x % y);
   }
 }
 
 export const mine2 = data => {
   if (data.times === 1) {
-    console.log(fearNotLetter('abce'));
+    console.log(smallestCommons([1, 13]));
     return;
   }
   let count = 0;
   const start = new Date();
   while (new Date() - start < data.duration) {
-    fearNotLetter('abce');
+    smallestCommons([1, 13]);
     count++;
   }
   return count;
