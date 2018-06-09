@@ -263,4 +263,67 @@ const Person = class {
 };
 
 const bob = new Person('Bob Ross');
-///////////////////////////////////
+///////////// mine //////////////////////
+function orbitalPeriod(arr) {
+  const GM = 398600.4418;
+  const earthRadius = 6367.4447;
+
+  arr.forEach(obj => {
+    const period = Math.round(
+      2 * Math.PI * Math.sqrt(Math.pow(earthRadius + obj.avgAlt, 3) / GM)
+    );
+    delete obj.avgAlt;
+    obj.orbitalPeriod = period;
+  });
+
+  return arr;
+}
+orbitalPeriod([{ name: 'sputnik', avgAlt: 35873.5553 }]);
+///////////// mine ///////////////////////
+function convertToRoman(num) {
+  const roman = x => {
+    const numeral = new Map();
+    numeral.set(0, '');
+    numeral.set(1, 'I');
+    numeral.set(2, 'II');
+    numeral.set(3, 'III');
+    numeral.set(4, 'IV');
+    numeral.set(5, 'V');
+    numeral.set(6, 'VI');
+    numeral.set(7, 'VII');
+    numeral.set(8, 'VIII');
+    numeral.set(9, 'IX');
+    numeral.set(10, 'X');
+    numeral.set(20, 'XX');
+    numeral.set(30, 'XXX');
+    numeral.set(40, 'XL');
+    numeral.set(50, 'L');
+    numeral.set(60, 'LX');
+    numeral.set(70, 'LXX');
+    numeral.set(80, 'LXXX');
+    numeral.set(90, 'XC');
+    numeral.set(100, 'C');
+    numeral.set(200, 'CC');
+    numeral.set(300, 'CCC');
+    numeral.set(400, 'CD');
+    numeral.set(500, 'D');
+    numeral.set(600, 'DC');
+    numeral.set(700, 'DCC');
+    numeral.set(800, 'DCCC');
+    numeral.set(900, 'CM');
+    numeral.set(1000, 'M');
+    numeral.set(2000, 'MM');
+    numeral.set(3000, 'MMM');
+    return numeral.get(+x);
+  };
+  const resArr = [];
+  const numArr = num
+    .toString()
+    .split('')
+    .reverse();
+  numArr.forEach((x, i) => resArr.unshift(x + '0'.repeat(i)));
+  return resArr.reduce((a, b) => a + roman(b), '');
+}
+
+convertToRoman(1004);
+////////////////////////////////////
