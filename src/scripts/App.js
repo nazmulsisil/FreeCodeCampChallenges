@@ -51,7 +51,7 @@ const arrayOfAlphabets = [
 ];
 
 const data = {
-  times: 1, // if times is equal to 1, then you will see 1 run and you'll get console log
+  times: 10, // if times is equal to 1, then you will see 1 run and you'll get console log
   duration: 1500,
   arrayOfNumbersArrays: arrayOfNumbersArrays(1000),
   paragraph,
@@ -60,11 +60,11 @@ const data = {
 };
 
 const functionDescriptions = [
-  // otherUser,
+  otherUser,
   mine1
   // intermediate,
-  // basic,
-  // mine2,
+  // basic
+  // mine2
   // advanced
 ];
 
